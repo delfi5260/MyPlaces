@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		461E8BAF2332990700F66A73 /* CustomTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 461E8BAE2332990700F66A73 /* CustomTableViewCell.swift */; };
 		463331C1232681B800C11791 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 463331C0232681B800C11791 /* AppDelegate.swift */; };
 		463331C6232681B800C11791 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 463331C4232681B800C11791 /* Main.storyboard */; };
 		463331C8232681B800C11791 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 463331C7232681B800C11791 /* Assets.xcassets */; };
@@ -15,6 +16,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		461E8BAE2332990700F66A73 /* CustomTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTableViewCell.swift; sourceTree = "<group>"; };
 		463331BD232681B800C11791 /* MyPlaces.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MyPlaces.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		463331C0232681B800C11791 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		463331C5232681B800C11791 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -56,6 +58,7 @@
 			children = (
 				463331C0232681B800C11791 /* AppDelegate.swift */,
 				463331D22326952B00C11791 /* MainViewController.swift */,
+				461E8BAE2332990700F66A73 /* CustomTableViewCell.swift */,
 				463331C4232681B800C11791 /* Main.storyboard */,
 				463331C7232681B800C11791 /* Assets.xcassets */,
 				463331C9232681B800C11791 /* LaunchScreen.storyboard */,
@@ -135,6 +138,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				461E8BAF2332990700F66A73 /* CustomTableViewCell.swift in Sources */,
 				463331C1232681B800C11791 /* AppDelegate.swift in Sources */,
 				463331D32326952B00C11791 /* MainViewController.swift in Sources */,
 			);
