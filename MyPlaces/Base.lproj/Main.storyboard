@@ -111,7 +111,7 @@
                                                     <rect key="frame" x="0.0" y="0.0" width="414" height="250"/>
                                                 </imageView>
                                             </subviews>
-                                            <color key="backgroundColor" systemColor="tertiarySystemGroupedBackgroundColor" red="0.94901960780000005" green="0.94901960780000005" blue="0.96862745100000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                            <color key="backgroundColor" systemColor="tertiarySystemGroupedBackgroundColor" red="0.94901960784313721" green="0.94901960784313721" blue="0.96862745098039216" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                             <constraints>
                                                 <constraint firstItem="YLB-kF-jV9" firstAttribute="leading" secondItem="axv-5t-AYg" secondAttribute="leading" id="9Xr-yV-Gzj"/>
                                                 <constraint firstItem="YLB-kF-jV9" firstAttribute="top" secondItem="axv-5t-AYg" secondAttribute="top" id="V1z-ak-S9j"/>
@@ -256,6 +256,9 @@
                         </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" systemItem="save" id="qci-Sk-DuN"/>
                     </navigationItem>
+                    <connections>
+                        <outlet property="imageOfPlace" destination="YLB-kF-jV9" id="X27-zU-csU"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="U5b-pF-dJY" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
                 <exit id="18v-rs-W6K" userLabel="Exit" sceneMemberID="exit"/>
