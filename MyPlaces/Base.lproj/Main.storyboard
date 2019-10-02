@@ -111,7 +111,7 @@
                                                     <rect key="frame" x="0.0" y="0.0" width="414" height="250"/>
                                                 </imageView>
                                             </subviews>
-                                            <color key="backgroundColor" systemColor="tertiarySystemGroupedBackgroundColor" red="0.94901960784313721" green="0.94901960784313721" blue="0.96862745098039216" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                            <color key="backgroundColor" systemColor="tertiarySystemGroupedBackgroundColor" red="0.94901960780000005" green="0.94901960780000005" blue="0.96862745100000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                             <constraints>
                                                 <constraint firstItem="YLB-kF-jV9" firstAttribute="leading" secondItem="axv-5t-AYg" secondAttribute="leading" id="9Xr-yV-Gzj"/>
                                                 <constraint firstItem="YLB-kF-jV9" firstAttribute="top" secondItem="axv-5t-AYg" secondAttribute="top" id="V1z-ak-S9j"/>
@@ -251,13 +251,22 @@
                     <navigationItem key="navigationItem" title="New Place" id="h5v-qE-iTR">
                         <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="7z9-43-z7Y">
                             <connections>
-                                <segue destination="18v-rs-W6K" kind="unwind" unwindAction="cancelAction:" id="5qu-aQ-vja"/>
+                                <action selector="cancelAction:" destination="aAk-dx-nSx" id="lO7-DK-z9K"/>
                             </connections>
                         </barButtonItem>
-                        <barButtonItem key="rightBarButtonItem" systemItem="save" id="qci-Sk-DuN"/>
+                        <barButtonItem key="rightBarButtonItem" systemItem="save" id="qci-Sk-DuN">
+                            <connections>
+                                <segue destination="18v-rs-W6K" kind="unwind" unwindAction="unwindSegue:" id="01g-BL-c2H"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                     <connections>
-                        <outlet property="imageOfPlace" destination="YLB-kF-jV9" id="X27-zU-csU"/>
+                        <outlet property="cancel" destination="7z9-43-z7Y" id="daD-xJ-f2G"/>
+                        <outlet property="locationName" destination="B8b-RR-R45" id="TRU-kL-476"/>
+                        <outlet property="placeImage" destination="YLB-kF-jV9" id="X27-zU-csU"/>
+                        <outlet property="placeName" destination="lLB-dk-1xe" id="gmG-ky-BGH"/>
+                        <outlet property="saveButton" destination="qci-Sk-DuN" id="5Bh-hR-QCh"/>
+                        <outlet property="typeName" destination="xJT-Be-ylJ" id="3oI-MU-Qhv"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="U5b-pF-dJY" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>

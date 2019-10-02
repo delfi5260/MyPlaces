@@ -10,11 +10,26 @@ import UIKit
 
 class NewPlaceViewController: UITableViewController {
 
-    @IBOutlet weak var imageOfPlace: UIImageView!
+    @IBOutlet weak var saveButton: UIBarButtonItem!
+
+    @IBOutlet weak var cancel: UIBarButtonItem!
+    @IBOutlet weak var placeImage: UIImageView!
     
+    @IBOutlet weak var placeName: UITextField!
+    @IBOutlet weak var locationName: UITextField!
+    @IBOutlet weak var typeName: UITextField!
+    
+    
+    var imageIsChanged = false
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        saveButton.isEnabled = false
         tableView.tableFooterView = UIView() // Убрать разлиновку пустых строк в низу Table
+        placeName.addTarget(self, action: #selector(textFieldChanged), for: .editingChanged)
+        
+        
+        
     }
 
 //MARK: Table view delegate
@@ -52,6 +67,27 @@ class NewPlaceViewController: UITableViewController {
         }
     }
     
+    func saveNewPlace() {
+        
+        var image: UIImage?
+        if imageIsChanged {
+            image = placeImage.image
+        } else {
+            image = #imageLiteral(resourceName: "imagePlaceholder")
+        }
+        
+        let imageData = image?.pngData()
+        
+        let newPlace = Place(name: placeName.text!, location: locationName.text, type: typeName.text, imageData: imageData)
+        
+        StorageManager.svaeObject(newPlace)
+        
+    }
+    
+    @IBAction func cancelAction(_ sender: UIBarButtonItem) {
+        dismiss(animated: true)
+    }
+    
 
 }
 // MARK: Text field delegate
@@ -62,6 +98,15 @@ extension NewPlaceViewController: UITextFieldDelegate, UINavigationControllerDel
         textField.resignFirstResponder()
         return true
     }
+    
+    @objc private func textFieldChanged(){
+        if placeName.text?.isEmpty == false {
+            saveButton.isEnabled = true
+        }else{
+            saveButton.isEnabled = false
+        }
+    }
+    
 }
 
 // MARK: Work with image
@@ -80,10 +125,10 @@ extension NewPlaceViewController : UIImagePickerControllerDelegate{
     
     func imagePickerController(_ picker: UIImagePickerController,
                                didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
-        imageOfPlace.image = info[.editedImage] as? UIImage
-        imageOfPlace.contentMode = .scaleAspectFill // масштабирование изображение по содержимому UIImage
-        imageOfPlace.clipsToBounds = true // Обрезка по границе UIImage
-        
+        placeImage.image = info[.editedImage] as? UIImage
+        placeImage.contentMode = .scaleAspectFill // масштабирование изображение по содержимому UIImage
+        placeImage.clipsToBounds = true // Обрезка по границе UIImage
+        imageIsChanged = true // изменить перед выбором
         dismiss(animated: true) // закрываем пикер
         
     }
