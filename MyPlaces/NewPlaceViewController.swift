@@ -11,25 +11,22 @@ import UIKit
 class NewPlaceViewController: UITableViewController {
 
     @IBOutlet weak var saveButton: UIBarButtonItem!
-
     @IBOutlet weak var cancel: UIBarButtonItem!
+    
     @IBOutlet weak var placeImage: UIImageView!
-    
     @IBOutlet weak var placeName: UITextField!
-    @IBOutlet weak var locationName: UITextField!
-    @IBOutlet weak var typeName: UITextField!
+    @IBOutlet weak var placeLocation: UITextField!
+    @IBOutlet weak var placeType: UITextField!
     
-    
-    var imageIsChanged = false
+    var currentPlace: Place?
+    var imageIsChanged = false // Флаг меняет ли юзер изображение если нет то ставим дефолд пикчу
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        saveButton.isEnabled = false
+        saveButton.isEnabled = false // Отключаем кнопку сохранения пока юзер не введё PlaceName
         tableView.tableFooterView = UIView() // Убрать разлиновку пустых строк в низу Table
-        placeName.addTarget(self, action: #selector(textFieldChanged), for: .editingChanged)
-        
-        
-        
+        placeName.addTarget(self, action: #selector(textFieldChanged), for: .editingChanged) // Отслеживание редактирование TF
+        setupEditScreen()
     }
 
 //MARK: Table view delegate
@@ -67,20 +64,30 @@ class NewPlaceViewController: UITableViewController {
         }
     }
     
-    func saveNewPlace() {
+    func savePlace() {
         
         var image: UIImage?
-        if imageIsChanged {
+        if imageIsChanged { // Или пользователь выбрал пикчу или ставим дефолд
             image = placeImage.image
         } else {
-            image = #imageLiteral(resourceName: "imagePlaceholder")
+            image = #imageLiteral(resourceName: "MapLogo")
         }
         
-        let imageData = image?.pngData()
+        let imageData = image?.pngData() // Конвертируем из Data для UIImage
         
-        let newPlace = Place(name: placeName.text!, location: locationName.text, type: typeName.text, imageData: imageData)
-        
-        StorageManager.svaeObject(newPlace)
+        let newPlace = Place(name: placeName.text!,
+                             location: placeLocation.text,
+                             type: placeType.text,
+                             imageData: imageData)
+        if currentPlace != nil {
+            try! realm.write {
+                currentPlace?.imageData = newPlace.imageData
+                currentPlace?.name = newPlace.name
+                currentPlace?.location = newPlace.location
+                currentPlace?.type = newPlace.type
+            }
+            
+        } else { StorageManager.svaeObject(newPlace) } // Добавляем в БД
         
     }
     
@@ -88,8 +95,31 @@ class NewPlaceViewController: UITableViewController {
         dismiss(animated: true)
     }
     
+    private func setupNavigationBar() {
+        if let topItem = navigationController?.navigationBar.topItem {
+            topItem.backBarButtonItem = UIBarButtonItem(title: "Back", style: .plain, target: nil, action: nil)
+        }
+        navigationItem.leftBarButtonItem = nil
+        title = currentPlace?.name
+        saveButton.isEnabled = true
+    }
+    
+    private func setupEditScreen(){
+        if currentPlace != nil {
+            setupNavigationBar()
+            imageIsChanged = true
+            guard let data = currentPlace?.imageData, let image = UIImage(data: data) else {return}
+            placeImage.image = image
+            placeImage.contentMode = .scaleAspectFill // Масштабируем изображение по содержимому
+            placeName.text = currentPlace?.name
+            placeLocation.text = currentPlace?.location
+            placeType.text = currentPlace?.type
+            
+        }
+    }
 
-}
+} // end NPVC
+
 // MARK: Text field delegate
 
 extension NewPlaceViewController: UITextFieldDelegate, UINavigationControllerDelegate{
@@ -100,6 +130,7 @@ extension NewPlaceViewController: UITextFieldDelegate, UINavigationControllerDel
     }
     
     @objc private func textFieldChanged(){
+        // Метод отслеживает пустое ли значение TF. При пустом значении кнопка сохранения отключается
         if placeName.text?.isEmpty == false {
             saveButton.isEnabled = true
         }else{
@@ -107,9 +138,10 @@ extension NewPlaceViewController: UITextFieldDelegate, UINavigationControllerDel
         }
     }
     
-}
+} // end TF delegate
 
 // MARK: Work with image
+
 extension NewPlaceViewController : UIImagePickerControllerDelegate{
     func chooseImagePicker(source: UIImagePickerController.SourceType) {
         
@@ -118,7 +150,7 @@ extension NewPlaceViewController : UIImagePickerControllerDelegate{
             imagePicker.delegate = self
             imagePicker.allowsEditing = true // Позволяем масштабировать изображение
             imagePicker.sourceType = source
-            present(imagePicker, animated: true)
+            present(imagePicker, animated: true) // Вызов
         }
         
     }
@@ -133,4 +165,4 @@ extension NewPlaceViewController : UIImagePickerControllerDelegate{
         
     }
     
-}
+} // end IPC delegate

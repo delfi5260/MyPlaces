@@ -15,7 +15,8 @@ class Place: Object{
     @objc dynamic var imageData: Data?
     
     convenience init(name:String, location:String?, type:String?, imageData:Data?) {
-        self.init()
+        //Инициализатор модели
+        self.init() // В таком инициализаторе сначало надо вызвать инициализатор своего класса
         self.name = name
         self.location = location
         self.type = type

@@ -368,7 +368,6 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 3FFC899F5A764F32EF26ED6E /* Pods-MyPlaces.debug.xcconfig */;
 			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = CU4ZDB8539;
 				INFOPLIST_FILE = MyPlaces/Info.plist;
@@ -387,7 +386,6 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = E54449572B842E8C75043F54 /* Pods-MyPlaces.release.xcconfig */;
 			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = CU4ZDB8539;
 				INFOPLIST_FILE = MyPlaces/Info.plist;
